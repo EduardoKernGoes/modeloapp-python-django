@@ -8,4 +8,5 @@ urlpatterns = [
     path('pessoas/', include('people.urls', namespace='people')),
     path('redesSociais/', include('socialNetwork.urls', namespace='socialNetwork')),
     path('funcionarios/', include('employees.urls', namespace='employees')),
+    path('clientes/', include('clients.urls', namespace='clients')),
 ]

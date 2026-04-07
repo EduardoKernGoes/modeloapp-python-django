@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'people.apps.PeopleConfig',
     'socialNetwork.apps.SocialnetworkConfig',
     'employees.apps.EmployeesConfig',
+    'clients.apps.ClientsConfig',
 ]
 
 MIDDLEWARE = [

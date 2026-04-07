@@ -9,3 +9,5 @@
 /apps/socialNetwork/migrations/*
 /apps/employees/__pycache__/*
 /apps/employees/migrations/*
+/apps/clients/__pycache__/*
+/apps/clients/migrations/*
