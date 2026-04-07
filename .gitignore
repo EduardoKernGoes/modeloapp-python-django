@@ -7,3 +7,5 @@
 /apps/people/migrations/*
 /apps/socialNetwork/__pycache__/*
 /apps/socialNetwork/migrations/*
+/apps/employees/__pycache__/*
+/apps/employees/migrations/*
