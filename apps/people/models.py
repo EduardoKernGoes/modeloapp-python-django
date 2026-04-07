@@ -6,8 +6,8 @@ class Person(models.Model):
     first_name = models.CharField('Nome', max_length=50)
     last_name = models.CharField('Sobrenome', max_length=100)
     address = models.CharField('Endereço', max_length=255)
-    phone = models.CharField('Telefone', max_length=15, help_text='EX: (11) 11111-1111')
-    email = models.EmailField('E-mail', max_length=100, unique=True)
+    phone = models.CharField('Celular', max_length=15, help_text='EX: (11) 11111-1111')
+    email = models.EmailField('E-mail', max_length=100, unique=True, null=False, blank=False)
 
     class Meta:
         verbose_name = 'Pessoa'

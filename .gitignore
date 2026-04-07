@@ -5,3 +5,5 @@
 /apps/products/migrations/*
 /apps/people/__pycache__/*
 /apps/people/migrations/*
+/apps/socialNetwork/__pycache__/*
+/apps/socialNetwork/migrations/*

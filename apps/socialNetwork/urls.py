@@ -2,11 +2,11 @@ from django.urls import path, include
 from . import views
 from rest_framework import routers
 
-app_name = 'people'
+app_name = 'socialNetwork'
 
 router = routers.SimpleRouter()
-router.register('', views.PersonViewSet, basename='pessoas')
+router.register('', views.SocialNetworkViewSet, basename='redeSocial')
 
 urlpatterns = [
-    path('', include(router.urls))
+    path('', include(router.urls) )
 ]
