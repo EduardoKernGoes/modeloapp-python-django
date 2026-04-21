@@ -5,7 +5,7 @@ body {
 button {
   background-color: rgb(21, 124, 175);
   color: rgb(255, 255, 255);
-  width: 100px;
+  width: max-content;
   height: 40px;
   transition: 0.2s;
 }
