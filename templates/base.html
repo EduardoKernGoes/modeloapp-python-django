@@ -18,7 +18,7 @@
     <a href="{% url 'socialNetwork:list_socialnetworks' %}" ><button>Redes Sociais</button></a>
     <a href="{% url 'clients:list_clients' %}" ><button>Clientes</button></a>
     <a href="{% url 'employees:list_employees' %}" ><button>Funcionários</button></a>
-    <a href="#" ><button>Pedidos</button></a>
+    <a href="{% url 'orders:list_orders' %}" ><button>Pedidos</button></a>
     <br />
 
     {% block body %}

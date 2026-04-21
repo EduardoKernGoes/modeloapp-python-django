@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+    Lista de Pedidos - {{ block.super }}
+
+{% endblock title %}
+
+{% block body %}
+
+<br />
+    <a href="{% url 'orders:add_order' %}">Cadastro de novo pedido</a>
+<br />
+<br />
+<b>Lista de Pedidos</b>
+<table border="1">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Método de Pagamento</th>
+            <th>Status</th>
+            <th>Cliente</th>
+            <th>Funcionário</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for order in orders %}
+            <tr>
+                <td>{{ order.id }}</th>
+                <td>{{ order.payment_method }}</td>
+                <td>
+                {% if order.status == 'andamento' %}
+                    Em andamento
+                {% endif %}
+                {% if order.status == 'finalizado' %}
+                    Finalizado
+                {% endif %}
+                {% if order.status == 'cancelado' %}
+                    Cancelado
+                {% endif %}
+                </td>
+                <td>{{ order.client }}</td>
+                <td>{{ order.employee }}</td>
+                <td>
+                    <a href="{% url 'orders:edit_order' order.id %}" >Editar</a>
+                </td>
+                <td>    
+                    <a href="{% url 'orders:delete_order' order.id %}" >Excluir</a>
+                </td>
+            </tr> 
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock body %}
