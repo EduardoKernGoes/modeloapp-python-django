@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from .models import Invoice
 from rest_framework import viewsets
 from .serializer import InvoiceSerializer
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -9,6 +10,7 @@ class InvoiceViewSet(viewsets.ModelViewSet):
     queryset = Invoice.objects.all()
     serializer_class = InvoiceSerializer
 
+@login_required(login_url='/contas/login/')
 def create_invoice_for_order(order):
     if hasattr(order, 'invoice'):
         return order.invoice
@@ -18,6 +20,7 @@ def create_invoice_for_order(order):
         number=invoice_number
     )
 
+@login_required(login_url='/contas/login/')
 def view_invoice(request, invoice_id):
     template_name = 'invoices/view_invoice.html'
     invoice = get_object_or_404(Invoice, id=invoice_id)

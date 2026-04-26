@@ -3,6 +3,7 @@ from .models import SocialNetwork
 from rest_framework import viewsets
 from .serializer import SocialNetworkSerializer
 from .forms import SocialnetworkForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -10,6 +11,7 @@ class SocialNetworkViewSet(viewsets.ModelViewSet):
     queryset = SocialNetwork.objects.all()
     serializer_class = SocialNetworkSerializer
 
+@login_required(login_url='/contas/login/')
 def add_socialnetwork(request):
     template_name = 'socialnetworks/add_socialnetwork.html'
     context = {}
@@ -24,6 +26,7 @@ def add_socialnetwork(request):
     context['form'] = form
     return render(request, template_name, context)
 
+@login_required(login_url='/contas/login/')
 def list_socialnetworks(request):
     template_name = 'socialnetworks/list_socialnetworks.html'
     socialnetworks = SocialNetwork.objects.filter()
@@ -32,6 +35,7 @@ def list_socialnetworks(request):
     }
     return render(request, template_name, context)
 
+@login_required(login_url='/contas/login/')
 def edit_socialnetwork(request, id_socialnetwork):
     template_name = 'socialnetworks/add_socialnetwork.html'
     context ={}
@@ -45,6 +49,7 @@ def edit_socialnetwork(request, id_socialnetwork):
     context['form'] = form
     return render(request, template_name, context)
 
+@login_required(login_url='/contas/login/')
 def delete_socialnetwork(request, id_socialnetwork):
     socialnetwork = SocialNetwork.objects.get(id=id_socialnetwork)
     socialnetwork.delete()

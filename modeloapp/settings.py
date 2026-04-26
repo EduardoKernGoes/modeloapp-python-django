@@ -56,6 +56,8 @@ INSTALLED_APPS = [
     'django_filters',
     'core.apps.CoreConfig',
     'rest_framework.authtoken',
+    'accounts.apps.AccountsConfig',
+    'widget_tweaks'
 ]
 
 MIDDLEWARE = [

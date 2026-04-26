@@ -3,6 +3,7 @@ from .models import Employee
 from rest_framework import viewsets
 from .serializer import EmployeeSerializer
 from .forms import EmployeeForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -10,6 +11,7 @@ class EmployeeViewSet(viewsets.ModelViewSet):
     queryset = Employee.objects.all()
     serializer_class = EmployeeSerializer
 
+@login_required(login_url='/contas/login/')
 def add_employee(request):
     template_name = 'employees/add_employee.html'
     context = {}
@@ -24,6 +26,7 @@ def add_employee(request):
     context['form'] = form
     return render(request, template_name, context)
 
+@login_required(login_url='/contas/login/')
 def list_employees(request):
     template_name = 'employees/list_employees.html'
     employees = Employee.objects.filter()
@@ -32,6 +35,7 @@ def list_employees(request):
     }
     return render(request, template_name, context)
 
+@login_required(login_url='/contas/login/')
 def edit_employee(request, id_employee):
     template_name = 'employees/add_employee.html'
     context ={}
@@ -45,6 +49,7 @@ def edit_employee(request, id_employee):
     context['form'] = form
     return render(request, template_name, context)
 
+@login_required(login_url='/contas/login/')
 def delete_employee(request, id_employee):
     employee = Employee.objects.get(id=id_employee)
     employee.delete()

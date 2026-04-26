@@ -6,10 +6,14 @@ from clients.models import Client
 from employees.models import Employee
 from rest_framework import viewsets
 from .serializer import OrderSerializer
- # Invoice
 from invoices.views import create_invoice_for_order
- # Invoice
+from django.contrib.auth.decorators import login_required
 
+class OrderViewSet(viewsets.ModelViewSet):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
+
+@login_required(login_url='/contas/login/')
 def list_orders(request):
     template_name = 'orders/list_orders.html'
     orders = Order.objects.select_related('client', 'employee').all()
@@ -18,6 +22,7 @@ def list_orders(request):
     }
     return render(request, template_name, context)
 
+@login_required(login_url='/contas/login/')
 def list_items_products(request):
     template_name = 'orders/list_items_products.html'
     products = Product.objects.filter(is_active=True)
@@ -26,6 +31,7 @@ def list_items_products(request):
     }
     return render(request, template_name, context)
 
+@login_required(login_url='/contas/login/')
 def cart(request):
     template_name = 'orders/cart.html'
     cart = request.session.get('cart', {})
@@ -39,6 +45,7 @@ def cart(request):
     }
     return render(request, template_name, context)
 
+@login_required(login_url='/contas/login/')
 def add_cart(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     cart = request.session.get('cart', {})
@@ -59,6 +66,7 @@ def add_cart(request, product_id):
     request.session.modified = True
     return redirect('orders:cart')
 
+@login_required(login_url='/contas/login/')
 def edit_cart(request, product_id):
     if request.method == 'POST':
         quantity = int(request.POST.get('quantity', 1))
@@ -75,6 +83,7 @@ def edit_cart(request, product_id):
         request.session.modified = True
     return redirect('orders:cart')
 
+@login_required(login_url='/contas/login/')
 def delete_cart(request, product_id):
     cart = request.session.get('cart', {})
     pid = str(product_id)
@@ -84,6 +93,7 @@ def delete_cart(request, product_id):
     request.session.modified = True
     return redirect('orders:cart')
 
+@login_required(login_url='/contas/login/')
 def checkout(request):
     template_name = 'orders/checkout.html'
     cart = request.session.get('cart', {})
@@ -136,6 +146,7 @@ def checkout(request):
     }
     return render(request, template_name, context)
 
+@login_required(login_url='/contas/login/')
 def cancel_order(request, order_id):
     order = get_object_or_404(Order, id=order_id)
     if order.status != 'Cancelado':
@@ -143,6 +154,7 @@ def cancel_order(request, order_id):
         order.save()
     return redirect('orders:list_orders')
 
+@login_required(login_url='/contas/login/')
 def view_order(request, order_id):
     template_name = 'orders/view_order.html'
     order = get_object_or_404(Order, id=order_id)
@@ -152,7 +164,3 @@ def view_order(request, order_id):
         'items': items,
     }
     return render(request, template_name, context)
-
-class OrderViewSet(viewsets.ModelViewSet):
-    queryset = Order.objects.all()
-    serializer_class = OrderSerializer

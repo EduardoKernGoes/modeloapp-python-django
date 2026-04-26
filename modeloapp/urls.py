@@ -7,6 +7,7 @@ from rest_framework.authtoken.views import obtain_auth_token
 urlpatterns = [
     path('', include('core.urls', namespace='core')),
     path('admin/', admin.site.urls),
+    path('contas/', include('accounts.urls', namespace='accounts')),
     path('token-autenticacao/', obtain_auth_token),
     path('categorias/', include('categories.urls', namespace='categories')),
     path('produtos/', include('products.urls', namespace='products')),
