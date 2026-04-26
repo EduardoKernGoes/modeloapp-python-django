@@ -1,57 +1,48 @@
 {% extends 'base.html' %}
 
-{% block title %}
-
-    Lista de Pedidos - {{ block.super }}
-
-{% endblock title %}
-
 {% block body %}
-
-<br />
-    <a href="{% url 'orders:add_order' %}">Cadastro de novo pedido</a>
-<br />
 <br />
 <b>Lista de Pedidos</b>
 <table border="1">
     <thead>
         <tr>
             <th>ID</th>
-            <th>Método de Pagamento</th>
-            <th>Status</th>
             <th>Cliente</th>
             <th>Funcionário</th>
-            <th></th>
-            <th></th>
+            <th>Status</th>
+            <th>Total</th>
+            <th>Data</th>
+            <th>Ações</th>
         </tr>
     </thead>
     <tbody>
         {% for order in orders %}
-            <tr>
-                <td>{{ order.id }}</th>
-                <td>{{ order.payment_method }}</td>
-                <td>
-                {% if order.status == 'andamento' %}
-                    Em andamento
+        <tr>
+            <td>{{ order.id }}</td>
+            <td>
+                {% if order.client %}
+                    {{ order.client.first_name }} {{ order.client.last_name }}
                 {% endif %}
-                {% if order.status == 'finalizado' %}
-                    Finalizado
+            </td>
+            <td>
+                {% if order.employee %}
+                    {{ order.employee.first_name }} {{ order.employee.last_name }}
                 {% endif %}
-                {% if order.status == 'cancelado' %}
-                    Cancelado
-                {% endif %}
-                </td>
-                <td>{{ order.client }}</td>
-                <td>{{ order.employee }}</td>
-                <td>
-                    <a href="{% url 'orders:edit_order' order.id %}" >Editar</a>
-                </td>
-                <td>    
-                    <a href="{% url 'orders:delete_order' order.id %}" >Excluir</a>
-                </td>
-            </tr> 
+            </td>
+            <td>{{ order.get_status_display }}</td>
+            <td>{{ order.total }}</td>
+            <td>{{ order.created_at }}</td>
+            <td>
+                <a href="{% url 'orders:view_order' order.id %}">Ver</a>
+                |
+                <a href="{% url 'orders:cancel_order' order.id %}">Cancelar</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="7">Nenhum pedido encontrado.</td>
+        </tr>
         {% endfor %}
     </tbody>
 </table>
-
-{% endblock body %}
+{% endblock %}

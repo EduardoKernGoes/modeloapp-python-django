@@ -6,9 +6,10 @@ from orders.models import Order
 
 class Orderitem(models.Model):
     quantity = models.PositiveIntegerField('Quantidade',null=True, blank=True,default=0)
-    unitary_price = models.DecimalField('Preco unitario', max_digits=10, decimal_places=2)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    unit_price = models.DecimalField('Preco unitario', max_digits=10, decimal_places=2)
+    subtotal = models.FloatField('Preco unitario',null=True, blank=True, default=0.0)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='order_items')
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='items')
     
     class Meta:
         unique_together = ('order', 'product')
