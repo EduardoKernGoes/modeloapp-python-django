@@ -10,7 +10,6 @@ class InvoiceViewSet(viewsets.ModelViewSet):
     queryset = Invoice.objects.all()
     serializer_class = InvoiceSerializer
 
-@login_required(login_url='/contas/login/')
 def create_invoice_for_order(order):
     if hasattr(order, 'invoice'):
         return order.invoice
