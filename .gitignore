@@ -19,5 +19,7 @@
 /apps/invoices/migrations/*
 /apps/core/__pycache__/*
 /apps/core/migrations/*
+/apps/accounts/__pycache__/*
+/apps/accounts/migrations/*
 
 .rest
